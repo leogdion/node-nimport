@@ -1,0 +1,19 @@
+{
+  "database" : {
+    "name" : "bls_ap",
+    "user" : "bls_ap_user",
+    "password" : "bls_ap_pw",
+    "dialect" : "mysql"
+  },
+  "source" : {
+    "base" : "http://download.bls.gov/pub/time.series/ap/",
+    "options" : {
+      "headings" : true
+    }
+  },
+  "tables" : {
+    "ap.area" : {
+      "area_code" : {"STRING" : 4}
+    }
+  }
+}
