@@ -7,6 +7,9 @@
   },
   "source" : {
     "base" : "http://download.bls.gov/pub/time.series/ap/",
+    "aliases" : {
+      "ap.data" : "ap.data.0.Current"
+    },
     "options" : {
       "headings" : true
     }
@@ -16,7 +19,7 @@
       "area_code" : {"string" : 4},
       "area_name" : "string"
     },
-    "ap.data.0.Current" : {
+    "ap.data" : {
       "series_id" : {"string" : 17},
       "year" : {"integer" : 4},
       "period" : {"string" : 3},
