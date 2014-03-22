@@ -32,6 +32,8 @@
     "gulp-beautify": "^1.0.3"
   },
   "dependencies": {
-    "minimist": "0.0.8"
+    "minimist": "0.0.8",
+    "request": "^2.34.0",
+    "fast-csv": "^0.2.2"
   }
 }
