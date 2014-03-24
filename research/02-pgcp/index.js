@@ -17,9 +17,10 @@ var pgformatter = function (options) {
     return new pgformatter(options);
   }
   options = options || {};
-  options.objectMode = true;
   // init Transform
   Transform.call(this, options);
+  this._writableState.objectMode = true;
+  this._readableState.objectMode = false;
 };
 
 util.inherits(pgformatter, Transform);
@@ -33,7 +34,9 @@ pgformatter.prototype._transform = function (chunk, enc, cb) {
     return;
   }
   this._keys = this._keys || Object.keys(chunk);
-  var data = [[]];
+  var data = [
+    []
+  ];
   for (var index = 0; index < this._keys.length; index++) {
     data[0][index] = chunk[this._keys[index]] || '';
   }
@@ -49,9 +52,9 @@ pgformatter.prototype._flush = function (cb) {
 pg.connect("postgres://nimr02_user:test@localhost/nimr02",
   function (err, client, done) {
     var query = multiline(function () {
-      /*
-      drop table if exists ap_series;
-      create table ap_series (
+/*
+    drop table if exists ap_series;
+    create table ap_series (
     series_id char(17) NOT NULL,
     area_code char(4) NOT NULL,
     item_code char(7) NOT NULL,
@@ -61,13 +64,19 @@ pg.connect("postgres://nimr02_user:test@localhost/nimr02",
     end_year integer NOT NULL,
     end_period char(3) NOT NULL
     );
-  */});
+*/
+    });
     client.query(query, function (err, results) {
       if (!err) {
         var req = request("http://download.bls.gov/pub/time.series/ap/ap.series");
         var pgstream = client.query(copyFrom("COPY ap_series FROM STDIN with CSV"));
-        var fcsv = csv({delimiter : '\t', trim: true, headers : true, ignoreEmpty: true});
-        req.pipe(fcsv).pipe(pgformatter()).pipe(pgstream).pipe(process.stdout);
+        var fcsv = csv({
+          delimiter: '\t',
+          trim: true,
+          headers: true,
+          ignoreEmpty: true
+        });
+        req.pipe(fcsv).pipe(pgformatter()).pipe(pgstream);//.pipe(process.stdout);
         pgstream.on('end', function () {
           done();
           process.exit(0);
@@ -77,12 +86,10 @@ pg.connect("postgres://nimr02_user:test@localhost/nimr02",
           done();
           process.exit(0);
         });
-        
+
       } else {
         console.log(err);
-      done();
-    }
+        done();
+      }
     });
-//  request("http://download.bls.gov/pub/time.series/ap/ap.series")
-
-});
+  });
