@@ -33,6 +33,7 @@ pgformatter.prototype._transform = function (chunk, enc, cb) {
     cb();
     return;
   }
+  console.log(chunk);
   this._keys = this._keys || Object.keys(chunk);
   var data = [
     []
@@ -84,7 +85,7 @@ pg.connect("postgres://nimr02_user:test@localhost/nimr02",
         pgstream.on('error', function (error) {
           console.log(error);
           done();
-          process.exit(0);
+          process.exit(1);
         });
 
       } else {
