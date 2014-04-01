@@ -1,3 +1,5 @@
+var S = require('string');
+
 var data = { series_id: 'APUX4007471A',
   area_code: 'X400',
   item_code: '7471A',
@@ -13,12 +15,37 @@ function pgtypename (type) {
       return "DATE";
     }
   } else {
-    console.log(type);
     var keys = Object.keys(type);
     if (keys[0] === "string") {
       return "VARCHAR(" + type[keys[0]] + ")";
     }
   }
+}
+
+function format (table, data) {
+  var result = {};
+  var sources = {};
+  for (var key in data) {
+    sources[key] = data[key];
+  }
+  Object.keys(table.sources).forEach(function (sourceName){
+    var value;
+    var d = data[table.sources[sourceName].source];
+    var type = table.sources[sourceName].type;
+    if (type == "integer") {
+      value = parseInt(d.match(/\d+/));
+    }
+    sources[sourceName] = value;
+  });
+  Object.keys(table.columns).forEach(function (columnName) {
+    var column = table.columns[columnName];
+    if (column.format) {
+      result[columnName] = S(column.format).template(sources).s;
+    } else if (column.source) {
+      result[columnName] = data[column.source];
+    }
+  });
+  return result;
 }
 /*
 "ap.data" : {
@@ -38,16 +65,20 @@ var table = {
   indicies : ["areaCode", "itemCode"],
   sources : {
     beginYear : {
-      type : "integer"
+      type : "integer",
+      source: "begin_year"
     },
-    beginYear : {
-      type : "integer"
+    beginPeriod : {
+      type : "integer",
+      source: "begin_period"
     },
-    beginYear : {
-      type : "integer"
+    endYear : {
+      type : "integer",
+      source: "end_year"
     },
-    beginYear : {
-      type : "integer"
+    endPeriod : {
+      type : "integer",
+      source: "end_period"
     }
   },
   columns : {
@@ -64,11 +95,11 @@ var table = {
       type : {"string" : 4}
     },
     beginDate : {
-      format: "{beginYear}-{beginPeriod}-01",
+      format: "{{beginYear}}-{{beginPeriod}}-01",
       type: "date"
     },
     endDate : {
-      format: "{endYear}-{endPeriod}-01",
+      format: "{{endYear}}-{{endPeriod}}-01",
       type: "date"
     }
   }
@@ -80,5 +111,7 @@ query += Object.keys(table.columns).map(function (value) {
   return [value, pgtypename(column.type), column.nullable?"NULL":"NOT NULL"].join(" ");
 }).join(",\n") + "\n);";
 
+var formatted = format(table, data);
 
+console.log(formatted)
 console.log(query);
