@@ -62,7 +62,6 @@ function format (table, data) {
 var table = {
   name : "series",
   primaryKey: "seriesId",
-  indicies : ["areaCode", "itemCode"],
   sources : {
     beginYear : {
       type : "integer",
@@ -108,9 +107,13 @@ var table = {
 var query = "CREATE TABLE " + table.name + " (\n";
 query += Object.keys(table.columns).map(function (value) {
   var column = table.columns[value];
-  return [value, pgtypename(column.type), column.nullable?"NULL":"NOT NULL"].join(" ");
-}).join(",\n") + "\n);";
-
+  return "\t" + [value, pgtypename(column.type), column.nullable?"NULL":"NOT NULL"].join(" ");
+}).join(",\n");
+if (table.primaryKey) {
+  query += S(",\n\tCONSTRAINT {{primaryKey}}_pkey PRIMARY KEY ({{primaryKey}})").template(table);
+}
+query += "\n);";
+//CONSTRAINT ap_series_pkey PRIMARY KEY (series_id)
 var formatted = format(table, data);
 
 console.log(formatted)

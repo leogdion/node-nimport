@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var nodeunit_runner = require("gulp-nodeunit-runner");
+var mocha = require('gulp-mocha')
 var bump = require('gulp-bump');
 var jshint = require('gulp-jshint');
 var beautify = require('gulp-beautify');
@@ -7,7 +7,7 @@ var beautify = require('gulp-beautify');
 gulp.task('default', ['beautify', 'lint', 'test', 'bump']);
 
 gulp.task('test', function () {
-  gulp.src("./test/**/*.js").pipe(nodeunit_runner());
+  gulp.src("./test/**/*.js").pipe(mocha({reporter: 'nyan'}));
 });
 
 gulp.task('bump', function () {

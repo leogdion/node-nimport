@@ -1,33 +1,71 @@
 {
-  "database" : {
-    "name" : "bls_ap",
-    "user" : "bls_ap_user",
-    "password" : "bls_ap_pw",
-    "dialect" : "mysql"
+  "database": {
+    "name": "bls_ap",
+    "user": "bls_ap_user",
+    "password": "bls_ap_pw",
+    "dialect": "postgres"
   },
-  "source" : {
-    "base" : "http://download.bls.gov/pub/time.series/ap/",
-    "aliases" : {
-      "ap.data" : "ap.data.0.Current"
+  "source": {
+    "base": "http://download.bls.gov/pub/time.series/ap/",
+    "aliases": {
+      "series": "ap.series"
     },
-    "options" : {
-      "headings" : true
+    "options": {
+      "delimiter": "\t",
+      "trim": true,
+      "headers": true,
+      "ignoreEmpty": true
     }
   },
-  "tables" : {
-    "ap.area" : {
-      "area_code" : {"string" : 4},
-      "area_name" : "string"
+  "tables": [{
+    "name": "series",
+    "primaryKey": "seriesId",
+    "sources": {
+      "beginYear": {
+        "type": "integer",
+        "source": "begin_year"
+      },
+      "beginPeriod": {
+        "type": "integer",
+        "source": "begin_period"
+      },
+      "endYear": {
+        "type": "integer",
+        "source": "end_year"
+      },
+      "endPeriod": {
+        "type": "integer",
+        "source": "end_period"
+      }
     },
-    "ap.data" : {
-      "series_id" : {"string" : 17},
-      "year" : {"integer" : 4},
-      "period" : {"string" : 3},
-      "value" : {"decimal" : [8,4]},
-      "footnote_codes" : {
-        "type" : {"string" : 10},
-        "nullable" : "false"
+    "columns": {
+      "seriesId": {
+        "source": "series_id",
+        "type": {
+          "string": 17
+        }
+      },
+      "areaCode": {
+        "source": "area_code",
+        "type": {
+          "string": 4
+        }
+      },
+      "itemCode": {
+        "source": "item_code",
+        "type": {
+          "string": 4
+        }
+      },
+      "beginDate": {
+        "format": "{{beginYear}}-{{beginPeriod}}-01",
+        "type": "date"
+      },
+      "endDate": {
+        "format": "{{endYear}}-{{endPeriod}}-01",
+        "type": "date"
       }
     }
-  }
+  }]
+}
 }
