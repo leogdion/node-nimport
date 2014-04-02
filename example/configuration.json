@@ -1,71 +1,72 @@
 {
-  "database": {
-    "name": "bls_ap",
-    "user": "bls_ap_user",
-    "password": "bls_ap_pw",
-    "dialect": "postgres"
+  "database":{
+    "name":"bls_ap",
+    "user":"bls_ap_user",
+    "password":"bls_ap_pw",
+    "dialect":"postgres"
   },
-  "source": {
-    "base": "http://download.bls.gov/pub/time.series/ap/",
-    "aliases": {
-      "series": "ap.series"
+  "source":{
+    "base":"http://download.bls.gov/pub/time.series/ap/",
+    "map":{
+      "series":["ap.series"]
     },
-    "options": {
-      "delimiter": "\t",
-      "trim": true,
-      "headers": true,
-      "ignoreEmpty": true
+    "options":{
+      "delimiter":"\t",
+      "trim":true,
+      "headers":true,
+      "ignoreEmpty":true
     }
   },
-  "tables": [{
-    "name": "series",
-    "primaryKey": "seriesId",
-    "sources": {
-      "beginYear": {
-        "type": "integer",
-        "source": "begin_year"
-      },
-      "beginPeriod": {
-        "type": "integer",
-        "source": "begin_period"
-      },
-      "endYear": {
-        "type": "integer",
-        "source": "end_year"
-      },
-      "endPeriod": {
-        "type": "integer",
-        "source": "end_period"
-      }
-    },
-    "columns": {
-      "seriesId": {
-        "source": "series_id",
-        "type": {
-          "string": 17
+  "tables":[
+    {
+      "name":"series",
+      "primaryKey":"seriesId",
+      "sources":{
+        "beginYear":{
+          "type":"integer",
+          "source":"begin_year"
+        },
+        "beginPeriod":{
+          "type":"integer",
+          "source":"begin_period"
+        },
+        "endYear":{
+          "type":"integer",
+          "source":"end_year"
+        },
+        "endPeriod":{
+          "type":"integer",
+          "source":"end_period"
         }
       },
-      "areaCode": {
-        "source": "area_code",
-        "type": {
-          "string": 4
+      "columns":{
+        "seriesId":{
+          "source":"series_id",
+          "type":{
+            "string":17
+          }
+        },
+        "areaCode":{
+          "source":"area_code",
+          "type":{
+            "string":4
+          }
+        },
+        "itemCode":{
+          "source":"item_code",
+          "type":{
+            "string":4
+          }
+        },
+        "beginDate":{
+          "format":"{{beginYear}}-{{beginPeriod}}-01",
+          "type":"date"
+        },
+        "endDate":{
+          "format":"{{endYear}}-{{endPeriod}}-01",
+          "type":"date"
         }
-      },
-      "itemCode": {
-        "source": "item_code",
-        "type": {
-          "string": 4
-        }
-      },
-      "beginDate": {
-        "format": "{{beginYear}}-{{beginPeriod}}-01",
-        "type": "date"
-      },
-      "endDate": {
-        "format": "{{endYear}}-{{endPeriod}}-01",
-        "type": "date"
       }
     }
-  }]
-}
+  ]
 }

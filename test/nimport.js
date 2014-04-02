@@ -25,11 +25,15 @@ exports.loadFile = {
 };
 */
 var assert = require("assert")
-describe('Array', function(){
-  describe('#indexOf()', function(){
-    it('should return -1 when the value is not present', function(){
-      assert.equal(-1, [1,2,3].indexOf(5));
-      assert.equal(-1, [1,2,3].indexOf(0));
+describe('nimport', function(){
+  describe('#loadFile()', function(){
+    it('should not return an error', function(){
+      var nim = nimport.loadFile("validFile", {}, req);
+      assert.equal(undefined, nim.error);
+    })
+    it('should return an error', function(){
+      var nim = nimport.loadFile("invalidFile", {}, req);
+      assert.equal("FILE_NOT_FOUND", nim.error.code);
     })
   })
 })
