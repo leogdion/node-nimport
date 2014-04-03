@@ -3,7 +3,7 @@ var nimport = require('../lib/nimport.js');
 var nim = new nimport(require("./configuration.json"));
 nim.database().connect(function (err, client, done) {
   if (err) {
-    console.log(err);
+    console.log(err.query);
 
     process.exit(1);
   }
