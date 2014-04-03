@@ -1,6 +1,6 @@
 {
   "database":{
-    "name":"bls_ap",
+    "database":"bls_ap",
     "user":"bls_ap_user",
     "password":"bls_ap_pw",
     "dialect":"postgres"
@@ -14,7 +14,7 @@
       "delimiter":"\t",
       "trim":true,
       "headers":true,
-      "ignoreEmpty":true
+      "_ignoreEmpty":true
     }
   },
   "tables":[
@@ -55,7 +55,7 @@
         "itemCode":{
           "source":"item_code",
           "type":{
-            "string":4
+            "string":6
           }
         },
         "beginDate":{

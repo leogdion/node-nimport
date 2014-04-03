@@ -1,13 +1,31 @@
 var nimport = require('../lib/nimport.js');
 
 var nim = new nimport(require("./configuration.json"));
-nim.database().connect(function (err, client) {
+nim.database().connect(function (err, client, done) {
+  if (err) {
+    console.log(err);
+
+    process.exit(1);
+  }
   nim.tables().forEach(function (table) {
     client.table(table, function (error, table) {
-      console.log(table);
-      nim.sources(table.name).forEach(function (source) {
-        source.pipe(table.dest());
+      if (error) {
+        console.log(error);
+        process.exit(1);
+      }
+      nim.sources(table).forEach(function (source) {
+        var stream = table.dest();
+
+        source.pipe(stream);
+        stream.on('error', function (error) {
+          console.log(error);
+          process.exit(1);
+        });
+        stream.on('end', function () {
+          console.log("TEST");
+        });
       });
     });
   });
+  done();
 });
