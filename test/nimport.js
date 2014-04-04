@@ -22,8 +22,13 @@ describe('nimport', function(){
     });
   });
   describe('#tables', function(){
-    it('tables should be a tables', function(){
-      //nims[0].database().should.be.an.instanceOf(nimport.database);
+    it('tables should be empty', function(){
+      nims[0].tables().length.should.equal(0);
+    });
+  });
+  describe('#sources', function(){
+    it('sources should be empty', function(){
+      nims[0].sources("foo").length.should.equal(0);
     });
   });
 })
