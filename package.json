@@ -29,7 +29,8 @@
     "gulp-bump": "^0.1.6",
     "gulp-jshint": "^1.5.0",
     "gulp-beautify": "^1.0.3",
-    "gulp-mocha": "^0.4.1"
+    "gulp-mocha": "^0.4.1",
+    "chai": "^1.9.1"
   },
   "dependencies": {
     "minimist": "0.0.8",

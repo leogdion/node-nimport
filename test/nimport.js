@@ -1,5 +1,5 @@
 var nimport = require("../lib/nimport.js");
-
+var should = require('chai').should();
 var req = function (path) {
   if (path === "validFile") {
     return {};
@@ -26,7 +26,12 @@ exports.loadFile = {
 */
 var assert = require("assert")
 describe('nimport', function(){
-  describe('#loadFile()', function(){
+  describe('#constructor', function(){
+    it('should not return an error', function(){
+      var nim = new nimport ({});
+      nim.run.should.be.a('function');
+      nim.database().should.be.an.instanceOf(nimport.database);
+    });
     /*
     it('should not return an error', function(){
       var nim = nimport.loadFile("validFile", {}, req);
