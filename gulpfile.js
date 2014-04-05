@@ -9,21 +9,20 @@ var args = require('minimist')(process.argv.slice(2));
 
 gulp.task('default', ['beautify', 'lint', 'test', 'enforce-coverage', 'bump']);
 
-console.log(args);
 var key = args.strict ? "strict" : "loose";
 
 var thresholds = {
   strict: {
-    statements: 60,
-    branches: 55,
-    lines: 60,
-    functions: 70
+    statements: 85,
+    branches: 80,
+    functions: 80,
+    lines: 85
   },
   loose: {
-    statements: 50,
-    branches: 50,
-    lines: 50,
-    functions: 50
+    statements: 85,
+    branches: 80,
+    functions: 75,
+    lines: 85
   }
 };
 
@@ -33,7 +32,7 @@ gulp.task('enforce-coverage', function () {
     coverageDirectory: 'coverage',
     rootDirectory: ''
   };
-  return gulp.src('.').pipe(coverageEnforcer(options));
+  return gulp.src(['./lib/**/*.js', './bin/**/*', './bin/**/*.js']).pipe(coverageEnforcer(options));
 });
 
 gulp.task('test', function (cb) {

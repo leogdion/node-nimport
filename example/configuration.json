@@ -60,6 +60,11 @@
         },
         "beginDate":{
           "format":"{{beginYear}}-{{beginPeriod}}-01",
+          "value" : {
+            "year" : "beginYear",
+            "month" : "beginPeriod",
+            "day" : 1
+          },
           "type":"date"
         },
         "endDate":{

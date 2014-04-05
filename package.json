@@ -1,6 +1,6 @@
 {
   "name": "node-nimport",
-  "version": "0.0.29",
+  "version": "0.0.37",
   "description": "node module for importing data into a database",
   "main": "index.js",
   "bin": {
