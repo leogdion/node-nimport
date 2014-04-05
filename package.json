@@ -1,6 +1,6 @@
 {
   "name": "node-nimport",
-  "version": "0.0.14",
+  "version": "0.0.20",
   "description": "node module for importing data into a database",
   "main": "index.js",
   "bin": {
@@ -30,7 +30,9 @@
     "gulp-jshint": "^1.5.0",
     "gulp-beautify": "^1.0.3",
     "gulp-mocha": "^0.4.1",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "gulp-istanbul": "^0.1.1",
+    "gulp-istanbul-enforcer": "^1.0.2"
   },
   "dependencies": {
     "minimist": "0.0.8",
