@@ -5,25 +5,31 @@ var jshint = require('gulp-jshint');
 var beautify = require('gulp-beautify');
 var istanbul = require("gulp-istanbul");
 var coverageEnforcer = require("gulp-istanbul-enforcer");
+var args = require('minimist')(process.argv.slice(2));
 
 gulp.task('default', ['beautify', 'lint', 'test', 'enforce-coverage', 'bump']);
 
+console.log(args);
+var key = args.strict ? "strict" : "loose";
+
+var thresholds = {
+  strict: {
+    statements: 60,
+    branches: 55,
+    lines: 60,
+    functions: 70
+  },
+  loose: {
+    statements: 50,
+    branches: 50,
+    lines: 50,
+    functions: 50
+  }
+};
+
 gulp.task('enforce-coverage', function () {
   var options = {
-    thresholds: {
-      statements: 50,
-      branches: 50,
-      lines: 50,
-      functions: 50
-    },
-/*
-    thresholds: {
-      statements: 60,
-      branches: 55,
-      lines: 60,
-      functions: 70
-    },
-    */
+    thresholds: thresholds[key],
     coverageDirectory: 'coverage',
     rootDirectory: ''
   };
