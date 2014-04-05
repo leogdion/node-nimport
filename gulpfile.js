@@ -16,6 +16,14 @@ gulp.task('enforce-coverage', function () {
       lines: 50,
       functions: 50
     },
+/*
+    thresholds: {
+      statements: 60,
+      branches: 55,
+      lines: 60,
+      functions: 70
+    },
+    */
     coverageDirectory: 'coverage',
     rootDirectory: ''
   };
