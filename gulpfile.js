@@ -13,20 +13,20 @@ var key = args.strict ? "strict" : "loose";
 
 var thresholds = {
   strict: {
-    statements: 85,
-    branches: 80,
-    functions: 80,
-    lines: 85
+    statements: 95,
+    branches: 90,
+    functions: 95,
+    lines: 95
   },
   loose: {
-    statements: 85,
-    branches: 80,
-    functions: 75,
-    lines: 85
+    statements: 90,
+    branches: 85,
+    functions: 90,
+    lines: 90
   }
 };
 
-gulp.task('enforce-coverage', function () {
+gulp.task('enforce-coverage', ['test'], function () {
   var options = {
     thresholds: thresholds[key],
     coverageDirectory: 'coverage',
