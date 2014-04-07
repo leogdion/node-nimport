@@ -1,6 +1,6 @@
 var nimport = require("../lib/nimport.js");
 var should = require('chai').should();
-
+var EventEmitter = require("events").EventEmitter;
 var nims = [];
 
 describe('nimport', function () {
@@ -28,6 +28,15 @@ describe('nimport', function () {
   describe('#sources', function () {
     it('sources should be empty', function () {
       nims[0].sources("foo").length.should.equal(0);
+    });
+  });
+  describe('#run', function () {
+    it('run should be an event emitter', function () {
+      var run = nims[0].run();
+      run.should.be.an.instanceOf(EventEmitter);
+      run.on("error", function (error) {
+        //console.log(error);
+      });
     });
   });
 });

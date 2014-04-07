@@ -1,7 +1,19 @@
 var nimport = require('../lib/nimport.js');
 var async = require('async');
-var nim = new nimport(require("./configuration.json"));
+//var nim = new nimport(require("./configuration.json"),{reporter : "console"});
 
+var nim = new nimport();
+var run = nim.run();
+
+run.on("error", function (error) {
+  console.log(error.text);
+  process.exit(1);
+});
+
+run.on("end", function () {
+  process.exit(0);
+});
+/*
 var reporter = {
   __statuses : {},
   start : function (name, type, status) {
@@ -70,3 +82,4 @@ nim.database().connect(function (err, client, done) {
     }
   );
 });
+*/

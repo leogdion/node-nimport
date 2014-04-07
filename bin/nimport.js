@@ -3,10 +3,14 @@
 var nimport = require('../lib/nimport'),
     minimist = require('minimist');
 
-var nim = nimport.loadFile(minimist(process.argv.slice(2))._[0], {
+var nimrun = nimport.run(minimist(process.argv.slice(2))._[0], {
   reporter: "console"
 });
 
-if (nim.error) {
-  console.log(nim.error.text);
-}
+nimrun.on("error", function (error) {
+  console.log(error.text);
+});
+
+nimrun.on("end", function () {
+  process.exit(0);
+});
