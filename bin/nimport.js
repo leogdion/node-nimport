@@ -1,16 +1,27 @@
 #!/usr/bin / env node
 
-var nimport = require('../lib/nimport'),
-    minimist = require('minimist');
-
-var nimrun = nimport.run(minimist(process.argv.slice(2))._[0], {
-  reporter: "console"
+var nimport = require('../lib/nimport');
+var argv = require('minimist')(process.argv.slice(2), {
+  "default": {
+    "reporter": "console"
+  }
+});
+var path = require('path');
+var run = nimport.run(require(path.resolve(argv._[0])), {
+  reporter: argv.reporter
 });
 
-nimrun.on("error", function (error) {
-  console.log(error.text);
+run.on("error", function (error) {
+/*
+  if (error.message) {
+    console.log(error.message);
+  } else {
+    console.log(error);
+  }
+  */
+  process.exit(1);
 });
 
-nimrun.on("end", function () {
+run.on("end", function () {
   process.exit(0);
 });
