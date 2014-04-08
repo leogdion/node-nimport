@@ -17,7 +17,7 @@ describe('queries', function () {
           },
           primaryKey: "seriesId"
         });
-        query.should.match(/CREATE TABLE foo/);
+        query.should.match(/CREATE TABLE public.foo/);
         query.should.match(/seriesId VARCHAR\(17\)/);
         query.should.match(/CONSTRAINT seriesId_pkey PRIMARY KEY \(seriesId\)/);
       });
@@ -26,7 +26,7 @@ describe('queries', function () {
       it('should create a copy query', function () {
         queries.table.stream({
           name: "foo"
-        }).should.equal("COPY foo FROM STDIN with CSV");
+        }).should.equal("COPY public.foo FROM STDIN with CSV");
       });
     });
   });
