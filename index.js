@@ -1,3 +1,1 @@
-var nimport = require('./lib/nimport');
-
-console.log(nimport());
+module.exports = require('./lib/nimport');

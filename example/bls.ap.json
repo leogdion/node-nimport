@@ -6,9 +6,9 @@
     "dialect":"postgres"
   },
   "source":{
-    "base":"http://download.bls.gov/pub/time.series/ap/",
+    "base":"http://download.bls.gov/pub/time.series/",
     "map":{
-      "series":["ap.series"]
+      "series":["ap/ap.series"]
     },
     "options":{
       "delimiter":"\t",
@@ -20,6 +20,7 @@
   "tables":[
     {
       "name":"series",
+      "schema":"ap",
       "primaryKey":"seriesId",
       "sources":{
         "beginYear":{

@@ -54,7 +54,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('beautify', function () {
-  gulp.src(['./lib/**/*.js', './bin/**/*', './bin/**/*.js', './test/**/*.js', './gulpfile.js'], {
+  gulp.src(['./lib/**/*.js', './bin/**/*', './bin/**/*.js', '!./bin/nimport.js', './test/**/*.js', './gulpfile.js'], {
     base: '.'
   }).pipe(beautify({
     indentSize: 2,
