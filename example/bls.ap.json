@@ -7,9 +7,9 @@
   },
   "source":{
     "base":"http://download.bls.gov/pub/time.series/",
-    "map":{ 
+    "map":{
       "series":["ap/ap.series"],
-      "data":["ap/ap.data.1.HouseholdFuels", "ap/ap.data.2.Gasoline"]
+      "data":["ap/ap.data.1.HouseholdFuels", "ap/ap.data.2.Gasoline","ap/ap.data.3.Food"]
     },
     "options":{
       "delimiter":"\t",

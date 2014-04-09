@@ -7,6 +7,5 @@ describe('sources', function () {
       "foo": "bar"
     });
     src.__configuration.foo.should.equal("bar");
-    src.__fcsv.should.be.an.instanceof(require('stream'));
   });
 });
