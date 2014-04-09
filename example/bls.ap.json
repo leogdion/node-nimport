@@ -7,8 +7,9 @@
   },
   "source":{
     "base":"http://download.bls.gov/pub/time.series/",
-    "map":{
-      "series":["ap/ap.series"]
+    "map":{ 
+      "series":["ap/ap.series"],
+      "data":["ap/ap.data.1.HouseholdFuels", "ap/ap.data.2.Gasoline"]
     },
     "options":{
       "delimiter":"\t",
@@ -18,10 +19,48 @@
     }
   },
   "tables":[
+  {
+      "name":"data",
+      "schema":"ap",
+      "primaryKey":["seriesId", "date"],
+      "sources":{
+        "r_year":{
+          "type":"integer",
+          "source":"year"
+        },
+        "r_month":{
+          "type":"integer",
+          "source":"period"
+        }
+      },
+      "columns":{
+        "seriesId":{
+          "source":"series_id",
+          "type":{
+            "string":17
+          }
+        },
+        "date":{
+          "value" : {
+            "year" : "{{r_year}}",
+            "month" : "{{r_month}}",
+            "day" : 1
+          },
+          "options" : {
+            "first" : 1
+          },
+          "type":"date"
+        },
+        "value":{
+          "source":"value",
+          "type":"float"
+        }
+      }
+    },
     {
       "name":"series",
       "schema":"ap",
-      "primaryKey":"seriesId",
+      "primaryKey":["seriesId"],
       "sources":{
         "beginYear":{
           "type":"integer",

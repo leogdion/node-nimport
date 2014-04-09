@@ -8,6 +8,10 @@ describe('types', function () {
         var value = Math.random();
         integer.format(value).should.equal(value);
       });
+      it('should format the string to int', function () {
+        var value = Math.floor(Math.random()) * 1000;
+        integer.format("pre" + value.toString() + "post").should.equal(value);
+      });
     });
     describe("#validate", function () {
       it('should validate the date', function () {

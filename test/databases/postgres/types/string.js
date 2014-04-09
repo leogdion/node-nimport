@@ -14,11 +14,19 @@ describe('types', function () {
       });
     });
     describe("#pgtype", function () {
-      it('should return the correct postgres date', function () {
+      it('should return the correct postgres type for string', function () {
         var lens = [Math.random(), Math.random(), Math.random()];
         lens.forEach(function (value) {
           string({
             "string": value
+          }).pgtype().should.equal("VARCHAR(" + value + ")");
+        });
+      });
+      it('should return the correct postgres type for string', function () {
+        var lens = [Math.random(), Math.random(), Math.random()];
+        lens.forEach(function (value) {
+          string({
+            "length": value
           }).pgtype().should.equal("VARCHAR(" + value + ")");
         });
       });
