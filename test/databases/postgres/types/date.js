@@ -9,7 +9,7 @@ describe('types', function () {
         var value = {
           year: 2000
         };
-        date.format(value).should.equal("2000-01-01T00:00:00-05:00");
+        date.format(value).should.match(/^2000-01-01/);
       });
       it('should format the date', function () {
         var datez = datef({
@@ -26,7 +26,7 @@ describe('types', function () {
           y: 2001,
           d: 5
         };
-        datez.format(value).should.equal("2001-03-12T00:00:00-05:00");
+        datez.format(value).should.match(/^2001-03-12/);
       });
       it('should not format the invalid date', function () {
         var datez = datef({
