@@ -60,16 +60,25 @@
           }
         },
         "beginDate":{
-          "format":"{{beginYear}}-{{beginPeriod}}-01",
           "value" : {
-            "year" : "beginYear",
-            "month" : "beginPeriod",
+            "year" : "{{beginYear}}",
+            "month" : "{{beginPeriod}}",
             "day" : 1
+          },
+          "options" : {
+            "first" : 1
           },
           "type":"date"
         },
         "endDate":{
-          "format":"{{endYear}}-{{endPeriod}}-01",
+          "value" : {
+            "year" : "{{endYear}}",
+            "month" : "{{endPeriod}}",
+            "day" : 1
+          },
+          "options" : {
+            "first" : 1
+          },
           "type":"date"
         }
       }

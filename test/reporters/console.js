@@ -35,7 +35,6 @@ describe("reporters", function () {
       it("should not work", function () {
         r.__verbose = false;
         r.logger.__log = [];
-        console.log(r.logger);
         r.verbose("__verbose", "test", "test");
         should.not.exist(r.logger.__log.pop());
       });
@@ -43,7 +42,6 @@ describe("reporters", function () {
         r.__verbose = true;
         r.logger.__log = [];
         r.verbose("__verbose", "test", "test");
-        console.log(r.logger);
         r.logger.__log.pop().should.match(/__verbose/);
       });
     });

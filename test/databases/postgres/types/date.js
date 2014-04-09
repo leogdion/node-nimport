@@ -1,12 +1,49 @@
 var should = require('chai').should();
-var date = require('../../../../lib/databases/postgres/types/date.js')();
+var datef = require('../../../../lib/databases/postgres/types/date.js');
+var date = datef();
 
 describe('types', function () {
   describe("#date", function () {
     describe("#format", function () {
+      it('should format the date obj', function () {
+        var value = {
+          year: 2000
+        };
+        date.format(value).should.equal("2000-01-01T00:00:00-05:00");
+      });
       it('should format the date', function () {
-        var value = Math.random();
-        date.format(value).should.equal(value);
+        var datez = datef({
+          value: {
+            year: "{{y}}",
+            month: "{{d}}",
+            day: 12
+          },
+          options: {
+            first: 3
+          }
+        });
+        var value = {
+          y: 2001,
+          d: 5
+        };
+        datez.format(value).should.equal("2001-03-12T00:00:00-05:00");
+      });
+      it('should not format the invalid date', function () {
+        var datez = datef({
+          value: {
+            year: "{{y}}",
+            month: "{{d}}",
+            day: 12
+          },
+          options: {
+            first: 3
+          }
+        });
+        var value = {
+          y: 2001,
+          d: 45
+        };
+        should.not.exist(datez.format(value));
       });
     });
     describe("#validate", function () {
