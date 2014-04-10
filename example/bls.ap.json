@@ -9,7 +9,9 @@
     "base":"http://download.bls.gov/pub/time.series/",
     "map":{
       "series":["ap/ap.series"],
-      "data":["ap/ap.data.1.HouseholdFuels", "ap/ap.data.2.Gasoline","ap/ap.data.3.Food"]
+      "data":["ap/ap.data.1.HouseholdFuels", "ap/ap.data.2.Gasoline","ap/ap.data.3.Food"],
+      "area":["ap/ap.area"],
+      "item":["ap/ap.items"]
     },
     "options":{
       "delimiter":"\t",
@@ -19,6 +21,44 @@
     }
   },
   "tables":[
+  {
+    "name":"area",
+    "schema":"ap",
+    "primaryKey":["code"],
+    "columns":{
+      "code" : {
+        "source":"area_code",
+        "type": {
+          "string" : 4
+        }
+      },
+      "name" : {
+        "source":"area_name",
+        "type": {
+          "string" : 80
+        }
+      }
+    }
+  },
+  {
+    "name":"item",
+    "schema":"ap",
+    "primaryKey":["code"],
+    "columns":{
+      "code" : {
+        "source":"item_code",
+        "type": {
+          "string" : 7
+        }
+      },
+      "name" : {
+        "source":"item_name",
+        "type": {
+          "string" : 100
+        }
+      }
+    }
+  },
   {
       "name":"data",
       "schema":"ap",
