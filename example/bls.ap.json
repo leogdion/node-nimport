@@ -11,7 +11,7 @@
       "series":["ap/ap.series"],
       "data":["ap/ap.data.1.HouseholdFuels", "ap/ap.data.2.Gasoline","ap/ap.data.3.Food"],
       "area":["ap/ap.area"],
-      "item":["ap/ap.items"]
+      "item":["ap/ap.item"]
     },
     "options":{
       "delimiter":"\t",
