@@ -1,5 +1,7 @@
 node-nimport
 ============
+[![Build Status](https://travis-ci.org/leogdion/node-nimport.svg?branch=release/0.1.0)](https://travis-ci.org/leogdion/node-nimport)
+
 A node module for importing data from the web.
 
 ## Installation
