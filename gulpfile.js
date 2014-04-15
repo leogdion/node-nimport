@@ -1,13 +1,14 @@
-var gulp = require('gulp');
-var mocha = require('gulp-mocha');
-var bump = require('gulp-bump');
-var jshint = require('gulp-jshint');
-var beautify = require('gulp-beautify');
-var istanbul = require("gulp-istanbul");
-var coverageEnforcer = require("gulp-istanbul-enforcer");
-var args = require('minimist')(process.argv.slice(2));
+var gulp = require('gulp'),
+    mocha = require('gulp-mocha'),
+    bump = require('gulp-bump'),
+    jshint = require('gulp-jshint'),
+    beautify = require('gulp-beautify'),
+    istanbul = require("gulp-istanbul"),
+    coverageEnforcer = require("gulp-istanbul-enforcer"),
+    coveralls = require('gulp-coveralls');
+args = require('minimist')(process.argv.slice(2));
 
-gulp.task('default', ['beautify', 'lint', 'test', 'enforce-coverage', 'bump']);
+gulp.task('default', ['beautify', 'lint', 'test', 'enforce-coverage', 'coveralls', 'bump']);
 
 var key = args.strict ? "strict" : "loose";
 
@@ -25,6 +26,10 @@ var thresholds = {
     lines: 95
   }
 };
+
+gulp.task('coveralls', ['enforce-coverage'], function () {
+  gulp.src('coverage/**/lcov.info').pipe(coveralls());
+});
 
 gulp.task('enforce-coverage', ['test'], function () {
   var options = {
