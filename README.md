@@ -1,5 +1,8 @@
 node-nimport
 ============
+[![Build Status](https://travis-ci.org/leogdion/node-nimport.svg?branch=release/0.1.0)](https://travis-ci.org/leogdion/node-nimport) [![Coverage Status](https://coveralls.io/repos/leogdion/node-nimport/badge.png?branch=release/0.1.0)](https://coveralls.io/r/leogdion/node-nimport?branch=release/0.1.0) [![Codeship](https://www.codeship.io/projects/68d0ee80-a706-0131-c660-26855b373a72/status)](https://www.codeship.io/projects/68d0ee80-a706-0131-c660-26855b373a72/status)
+[![HuBoard badge](http://img.shields.io/badge/Hu-Board-7965cc.svg)](https://huboard.com/leogdion/node-nimport)[![david-dm](https://david-dm.org/leogdion/node-nimport?branch=release/0.1.0)](https://david-dm.org/leogdion/node-nimport?branch=release/0.1.0)
+
 A node module for importing data from the web.
 
 ## Installation
