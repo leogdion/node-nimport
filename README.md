@@ -20,8 +20,8 @@ A node module for importing data from the web.
 ### Code
 
 ```javascript
-  var nimport = require('nimport');
-  nimport.run(require("configuration.json"));
+  var nimport = require('node-nimport');
+  var nimport.run(require("configuration.json"));
   
   run.on("error", function (error) {
     console.log(error);
