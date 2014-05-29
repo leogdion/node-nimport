@@ -1,0 +1,8 @@
+{
+  "name": "01-shpfile",
+  "version": "0.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "shp": "0.0.1"
+  }
+}

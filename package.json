@@ -1,6 +1,6 @@
 {
   "name": "node-nimport",
-  "version": "0.0.127",
+  "version": "0.1.0",
   "description": "node module for importing data into a database",
   "main": "index.js",
   "bin": {
@@ -50,6 +50,7 @@
     "pg-copy-streams": "^0.2.2",
     "pg.js": "^2.11.1",
     "request": "^2.34.0",
+    "shp": "0.0.1",
     "string": "^1.8.0"
   }
 }
